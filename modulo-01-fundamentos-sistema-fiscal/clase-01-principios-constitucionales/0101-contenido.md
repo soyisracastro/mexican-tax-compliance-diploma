@@ -1,4 +1,4 @@
-# Fundamentos del sistema fiscal mexicano: guía profesional 2025-2026
+# Módulo 1 - Clase 01: Fundamentos del sistema fiscal mexicano
 
 El sistema tributario mexicano se estructura sobre cuatro pilares constitucionales —proporcionalidad, equidad, legalidad y destino al gasto público— que configuran un marco normativo complejo administrado por tres niveles de gobierno. Para el ejercicio fiscal 2025-2026, el **ISR mantiene la tasa del 30%** para personas morales, el **IVA general permanece en 16%**, y el **RESICO para personas físicas continúa con su límite de $3,500,000 MXN anuales**. La normatividad vigente se consolida en el CFF con última reforma del 14 de noviembre de 2025 y la RMF 2026 publicada el 28 de diciembre de 2025, documentos esenciales para el ejercicio profesional contable actual.
 
@@ -58,13 +58,13 @@ El **Artículo 67 del CFF** establece que las facultades de determinación **cad
 
 El **Artículo 146 del CFF** establece la **prescripción de créditos fiscales en 5 años** desde que el pago pudo ser legalmente exigido, interrumpiéndose con cada gestión de cobro notificada o reconocimiento del crédito. El plazo máximo con interrupciones no puede exceder **10 años**.
 
-| Concepto | Plazo | Fundamento |
-|----------|-------|------------|
-| Caducidad general | 5 años | Art. 67 CFF |
-| Caducidad sin RFC/contabilidad | 10 años | Art. 67 CFF |
-| Prescripción créditos fiscales | 5 años | Art. 146 CFF |
+| Concepto                       | Plazo       | Fundamento    |
+| ------------------------------ | ----------- | ------------- |
+| Caducidad general              | 5 años      | Art. 67 CFF   |
+| Caducidad sin RFC/contabilidad | 10 años     | Art. 67 CFF   |
+| Prescripción créditos fiscales | 5 años      | Art. 146 CFF  |
 | Conclusión visita domiciliaria | 12-24 meses | Art. 46-A CFF |
-| Resolución post-acta final | 6 meses | Art. 50 CFF |
+| Resolución post-acta final     | 6 meses     | Art. 50 CFF   |
 
 ---
 
@@ -92,13 +92,13 @@ El régimen de **sueldos y salarios** (Arts. 94-99, clave 605) aplica a trabajad
 
 El **RESICO para personas físicas** (Arts. 113-E a 113-J, clave 626) representa el régimen simplificado con mayor beneficio fiscal:
 
-| Ingresos mensuales | Tasa ISR |
-|-------------------|----------|
-| Hasta $25,000 | 1.00% |
-| $25,001 - $50,000 | 1.10% |
-| $50,001 - $83,333 | 1.50% |
-| $83,334 - $208,333 | 2.00% |
-| $208,334 - $291,667 | 2.50% |
+| Ingresos mensuales  | Tasa ISR |
+| ------------------- | -------- |
+| Hasta $25,000       | 1.00%    |
+| $25,001 - $50,000   | 1.10%    |
+| $50,001 - $83,333   | 1.50%    |
+| $83,334 - $208,333  | 2.00%    |
+| $208,334 - $291,667 | 2.50%    |
 
 El **límite de ingresos para RESICO PF es $3,500,000 anuales**, aplicable a empresarios, profesionistas y arrendadores. Queda excluido quien sea socio de persona moral (salvo Título III sin remanente), residente en el extranjero, o preste servicios preponderantemente a un solo cliente. Los contribuyentes RESICO no llevan contabilidad electrónica ni presentan DIOT, simplificando significativamente el cumplimiento.
 
@@ -112,13 +112,13 @@ El **Régimen General** (Título II) aplica a la mayoría de sociedades mercanti
 
 El **RESICO para personas morales** (Arts. 206-215, clave 626) es **obligatorio** —no opcional como para personas físicas— para empresas constituidas **únicamente por personas físicas** con ingresos hasta **$35,000,000 anuales**. Mantiene la tasa del 30% pero opera bajo flujo de efectivo: acumulación al cobro y deducción al pago, con mayores porcentajes de depreciación. Quedan excluidas empresas con socios personas morales, instituciones financieras, coordinados y AGAPES.
 
-| Aspecto | RESICO PF | RESICO PM |
-|---------|-----------|-----------|
-| Límite ingresos | $3.5 millones | $35 millones |
-| Tasa ISR | 1% - 2.5% | 30% |
-| Carácter | Opcional | Obligatorio |
-| Deducciones | No aplican | Sí aplican |
-| Contabilidad electrónica | No obligatoria | Obligatoria |
+| Aspecto                  | RESICO PF      | RESICO PM    |
+| ------------------------ | -------------- | ------------ |
+| Límite ingresos          | $3.5 millones  | $35 millones |
+| Tasa ISR                 | 1% - 2.5%      | 30%          |
+| Carácter                 | Opcional       | Obligatorio  |
+| Deducciones              | No aplican     | Sí aplican   |
+| Contabilidad electrónica | No obligatoria | Obligatoria  |
 
 El régimen de **Coordinados** (Arts. 72-73) aplica a autotransporte terrestre, permitiendo cálculo de ISR por cuenta de integrantes. El régimen **AGAPES** (Arts. 74-75) beneficia actividades primarias con reducción del 30% del ISR y exenciones parciales para sociedades de derecho agrario y cooperativas de producción.
 
