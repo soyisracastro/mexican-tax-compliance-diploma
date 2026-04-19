@@ -1,0 +1,84 @@
+---
+import Base from "../../layouts/Base.astro";
+import { loadAllDecks } from "../../lib/parseSlides";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (() => {
+  return loadAllDecks().map((deck) => ({
+    params: { deck: deck.slug },
+    props: { deck },
+  }));
+}) satisfies GetStaticPaths;
+
+const { deck } = Astro.props;
+const slides = deck.slides;
+const initialSlide = slides[0];
+---
+
+<Base title={`${deck.title} — Presentador`} bodyClass="bg-background">
+  <div id="presenter-root" data-deck-slug={deck.slug} data-total={slides.length}>
+    <!-- HUD superior -->
+    <div class="hud hud--top-left">
+      <span class="hud__block" id="hud-block">{initialSlide?.blockTitle ?? ""}</span>
+    </div>
+    <div class="hud hud--top-right">
+      <span class="hud__count">
+        <span id="hud-current">1</span> / {slides.length}
+      </span>
+    </div>
+
+    <!-- Slides (todos renderizados, solo uno visible) -->
+    {slides.map((slide, i) => (
+      <section
+        class="slide-shell"
+        data-slide-index={i}
+        data-block-title={slide.blockTitle ?? ""}
+        style={i === 0 ? "" : "display:none"}
+      >
+        <article class="slide">
+          <h1 class="slide__title">{slide.title}</h1>
+          {slide.contentHtml && (
+            <div class="slide__body" set:html={slide.contentHtml} />
+          )}
+        </article>
+      </section>
+    ))}
+
+    <!-- Barra de progreso -->
+    <div class="progress">
+      <div class="progress__fill" id="progress-fill" style="width: 0%"></div>
+    </div>
+
+    <!-- Controles keyboard hint -->
+    <div class="hud hud--bottom-right">
+      ← → · N notas · O overview
+    </div>
+  </div>
+
+  <script>
+    import { createController } from "../../scripts/presenter-controller";
+
+    const root = document.getElementById("presenter-root")!;
+    const slug = root.dataset.deckSlug!;
+    const total = parseInt(root.dataset.total!, 10);
+    const sections = Array.from(root.querySelectorAll<HTMLElement>("[data-slide-index]"));
+    const blockEl = document.getElementById("hud-block")!;
+    const currentEl = document.getElementById("hud-current")!;
+    const progressEl = document.getElementById("progress-fill")!;
+
+    createController({
+      deckSlug: slug,
+      totalSlides: total,
+      viewName: "presenter",
+      role: "presenter",
+      onChange: (i) => {
+        sections.forEach((s, idx) => {
+          s.style.display = idx === i ? "" : "none";
+        });
+        currentEl.textContent = String(i + 1);
+        progressEl.style.width = `${((i + 1) / total) * 100}%`;
+        blockEl.textContent = sections[i].dataset.blockTitle ?? "";
+      },
+    });
+  </script>
+</Base>

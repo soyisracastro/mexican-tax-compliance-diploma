@@ -1,0 +1,72 @@
+---
+import Base from "../layouts/Base.astro";
+import { loadAllDecks } from "../lib/parseSlides";
+
+const decks = loadAllDecks().sort((a, b) => a.slug.localeCompare(b.slug));
+---
+
+<Base title="Diplomado Fiscal — Presentador">
+  <main class="hub">
+    <div class="hub__intro">
+      <div class="eyebrow">Diplomado en Herramientas Prácticas ante la Autoridad Fiscal</div>
+      <h1 class="hub__title">Presentador de clases</h1>
+      <p class="hub__lead">
+        Vista de slides + teleprompter dual-screen para las sesiones del diplomado.
+        Abre <strong>Presenter</strong> en la pantalla de proyección y <strong>Notas</strong> en tu laptop;
+        se sincronizan en tiempo real vía BroadcastChannel.
+      </p>
+    </div>
+
+    <ul class="hub__list">
+      {decks.map((deck) => (
+        <li class="hub__deck">
+          <div>
+            <div class="hub__deck-slug">{deck.slug}</div>
+            <div class="hub__deck-title">{deck.title}</div>
+            <div class="hub__deck-meta">
+              {deck.slides.length} slides
+              {deck.totalMinutes && <span> · {deck.totalMinutes} min efectivos</span>}
+              <span> · {deck.sourcePath}</span>
+            </div>
+          </div>
+          <div></div>
+          <div class="hub__deck-actions">
+            <a class="btn-primary" href={`/presenter/${deck.slug}`}>Presenter →</a>
+            <a class="btn-outline" href={`/notes/${deck.slug}`}>Notas</a>
+            <a class="btn-outline" href={`/overview/${deck.slug}`}>Overview</a>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    {decks.length === 0 && (
+      <p style="color:var(--foreground-quiet); margin-top: 2rem;">
+        No se encontraron archivos <code>slides-scripts.md</code> en el repo.
+      </p>
+    )}
+
+    <section style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); font-size: 0.9rem; color: var(--foreground-quiet);">
+      <div class="eyebrow" style="margin-bottom: 1rem;">Atajos de teclado</div>
+      <ul style="list-style:none; padding:0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.5rem;">
+        <li><kbd>←</kbd> <kbd>→</kbd> — navegar</li>
+        <li><kbd>Space</kbd> — avanzar</li>
+        <li><kbd>Home</kbd> <kbd>End</kbd> — inicio/fin</li>
+        <li><kbd>N</kbd> — abrir vista de notas</li>
+        <li><kbd>P</kbd> — abrir vista presenter</li>
+        <li><kbd>O</kbd> — abrir overview</li>
+      </ul>
+    </section>
+  </main>
+</Base>
+
+<style is:global>
+  kbd {
+    background: var(--muted);
+    color: var(--foreground);
+    padding: 0.1em 0.5em;
+    border-radius: 0.25rem;
+    border: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+  }
+</style>

@@ -1,0 +1,110 @@
+---
+import Base from "../../layouts/Base.astro";
+import { loadAllDecks } from "../../lib/parseSlides";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (() => {
+  return loadAllDecks().map((deck) => ({
+    params: { deck: deck.slug },
+    props: { deck },
+  }));
+}) satisfies GetStaticPaths;
+
+const { deck } = Astro.props;
+const slides = deck.slides;
+
+// Agrupar slides por bloque para renderizado con headers
+interface Group {
+  block: string | null;
+  minutes: number | null;
+  items: Array<{ index: number; slide: (typeof slides)[number] }>;
+}
+
+const groups: Group[] = [];
+for (let i = 0; i < slides.length; i++) {
+  const slide = slides[i];
+  const last = groups[groups.length - 1];
+  if (!last || last.block !== slide.blockTitle) {
+    groups.push({
+      block: slide.blockTitle,
+      minutes: slide.blockMinutes,
+      items: [{ index: i, slide }],
+    });
+  } else {
+    last.items.push({ index: i, slide });
+  }
+}
+---
+
+<Base title={`${deck.title} — Overview`} bodyClass="bg-background">
+  <div class="overview" data-deck-slug={deck.slug} data-total={slides.length}>
+    <header class="overview__header">
+      <div class="eyebrow">Overview</div>
+      <h1 class="overview__title">{deck.title}</h1>
+      {deck.subtitle && <p class="overview__subtitle">{deck.subtitle}</p>}
+      <p class="overview__subtitle" style="margin-top:0.5rem">
+        {slides.length} slides
+        {deck.totalMinutes && <span> · {deck.totalMinutes} min</span>}
+      </p>
+    </header>
+
+    <div class="overview__grid">
+      {groups.map((g) => (
+        <>
+          {g.block && (
+            <div class="overview__block-head">
+              {g.block}
+              {g.minutes != null && <span style="color:var(--foreground-ghost); margin-left:0.75em">· {g.minutes} min</span>}
+            </div>
+          )}
+          {g.items.map(({ index, slide }) => (
+            <a
+              class="overview__card"
+              href={`/presenter/${deck.slug}?slide=${index + 1}`}
+              data-slide-index={index}
+            >
+              <div class="overview__card-number">Slide {slide.number}</div>
+              <div class="overview__card-title">{slide.title}</div>
+              {slide.estimatedMinutes != null && (
+                <div class="overview__card-time">~{slide.estimatedMinutes} min</div>
+              )}
+            </a>
+          ))}
+        </>
+      ))}
+    </div>
+  </div>
+
+  <script>
+    import { createSync } from "../../scripts/sync";
+
+    const root = document.querySelector<HTMLElement>(".overview")!;
+    const slug = root.dataset.deckSlug!;
+    const sync = createSync(slug);
+
+    // Click en tarjeta: navegar y avisar a las otras vistas
+    document.querySelectorAll<HTMLAnchorElement>(".overview__card").forEach((card) => {
+      card.addEventListener("click", () => {
+        const idx = parseInt(card.dataset.slideIndex ?? "0", 10);
+        sync.post({ type: "goto", slideIndex: idx, source: "overview" });
+        // Dejar que el <a href> navegue normalmente al presenter
+      });
+    });
+
+    // Escuchar cambios remotos para resaltar el slide actual
+    const highlight = (i: number) => {
+      document.querySelectorAll<HTMLElement>(".overview__card").forEach((el) => {
+        const idx = parseInt(el.dataset.slideIndex ?? "-1", 10);
+        el.style.borderColor = idx === i ? "var(--primary)" : "var(--border)";
+      });
+    };
+    sync.onMessage((msg) => {
+      if (msg.type === "goto") highlight(msg.slideIndex);
+    });
+
+    // Estado inicial
+    const params = new URLSearchParams(window.location.search);
+    const slideParam = params.get("slide");
+    if (slideParam) highlight(parseInt(slideParam, 10) - 1);
+  </script>
+</Base>

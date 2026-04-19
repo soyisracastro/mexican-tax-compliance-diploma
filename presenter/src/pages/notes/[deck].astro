@@ -1,0 +1,154 @@
+---
+import Base from "../../layouts/Base.astro";
+import { loadAllDecks } from "../../lib/parseSlides";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (() => {
+  return loadAllDecks().map((deck) => ({
+    params: { deck: deck.slug },
+    props: { deck },
+  }));
+}) satisfies GetStaticPaths;
+
+const { deck } = Astro.props;
+const slides = deck.slides;
+---
+
+<Base title={`${deck.title} — Notas`} bodyClass="dark">
+  <div class="notes" id="notes-root" data-deck-slug={deck.slug} data-total={slides.length}>
+    <header class="notes__header">
+      <div>
+        <div class="notes__slide-meta">
+          Slide <span id="notes-current">1</span> / {slides.length}
+          <span id="notes-block" style="margin-left: 1em; color: #6b7280;"></span>
+        </div>
+        <h1 class="notes__slide-title" id="notes-title">Cargando…</h1>
+      </div>
+      <div class="notes__timer">
+        <div class="notes__timer-value" id="timer-slide">—:—</div>
+        <div class="notes__timer-label">Slide actual</div>
+        <div class="notes__timer-value" id="timer-total" style="font-size: 1rem; margin-top: 0.5rem;">—:—</div>
+        <div class="notes__timer-label">Total restante</div>
+      </div>
+    </header>
+
+    <div class="notes__script" id="notes-script"></div>
+
+    <aside class="notes__preview">
+      <div class="notes__preview-label">Próxima slide</div>
+      <div class="notes__preview-title" id="preview-title">—</div>
+      <div class="notes__preview-body" id="preview-body"></div>
+    </aside>
+
+    <footer class="notes__controls">
+      <span><kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Space</kbd> avanzar</span>
+      <span><kbd>P</kbd> presenter · <kbd>O</kbd> overview</span>
+    </footer>
+  </div>
+
+  <!-- Datos inyectados como JSON para acceso en cliente -->
+  <script is:inline id="slides-data" type="application/json" set:html={JSON.stringify(
+    slides.map((s) => ({
+      number: s.number,
+      title: s.title,
+      scriptHtml: s.scriptHtml,
+      contentHtml: s.contentHtml,
+      blockTitle: s.blockTitle,
+      estimatedMinutes: s.estimatedMinutes,
+    }))
+  )}></script>
+
+  <script>
+    import { createController } from "../../scripts/presenter-controller";
+
+    const root = document.getElementById("notes-root")!;
+    const slug = root.dataset.deckSlug!;
+    const total = parseInt(root.dataset.total!, 10);
+
+    interface SlideData {
+      number: number;
+      title: string;
+      scriptHtml: string;
+      contentHtml: string;
+      blockTitle: string | null;
+      estimatedMinutes: number | null;
+    }
+
+    const slides: SlideData[] = JSON.parse(
+      document.getElementById("slides-data")!.textContent ?? "[]"
+    );
+
+    const currentEl = document.getElementById("notes-current")!;
+    const blockEl = document.getElementById("notes-block")!;
+    const titleEl = document.getElementById("notes-title")!;
+    const scriptEl = document.getElementById("notes-script")!;
+    const previewTitleEl = document.getElementById("preview-title")!;
+    const previewBodyEl = document.getElementById("preview-body")!;
+    const timerSlideEl = document.getElementById("timer-slide")!;
+    const timerTotalEl = document.getElementById("timer-total")!;
+
+    // Temporizador por slide
+    let slideStartTime = Date.now();
+    let currentIndex = 0;
+
+    function formatDuration(ms: number): string {
+      const totalSeconds = Math.max(0, Math.round(ms / 1000));
+      const m = Math.floor(totalSeconds / 60);
+      const s = totalSeconds % 60;
+      return `${m}:${String(s).padStart(2, "0")}`;
+    }
+
+    function renderSlide(i: number) {
+      const s = slides[i];
+      if (!s) return;
+      currentIndex = i;
+      slideStartTime = Date.now();
+
+      currentEl.textContent = String(i + 1);
+      blockEl.textContent = s.blockTitle ?? "";
+      titleEl.textContent = s.title;
+      scriptEl.innerHTML = s.scriptHtml || "<p style='color:#6b7280'><em>Sin script para este slide.</em></p>";
+      scriptEl.scrollTop = 0;
+
+      // Preview del siguiente
+      const nextSlide = slides[i + 1];
+      if (nextSlide) {
+        previewTitleEl.textContent = nextSlide.title;
+        previewBodyEl.innerHTML = nextSlide.contentHtml || "<em style='color:#4b5563'>Sin contenido visual.</em>";
+      } else {
+        previewTitleEl.textContent = "Último slide";
+        previewBodyEl.innerHTML = "<em style='color:#4b5563'>Fin de la presentación.</em>";
+      }
+    }
+
+    // Actualizar temporizadores cada segundo
+    setInterval(() => {
+      const elapsed = Date.now() - slideStartTime;
+      const estimate = slides[currentIndex]?.estimatedMinutes;
+      if (estimate != null) {
+        const target = estimate * 60 * 1000;
+        const remaining = target - elapsed;
+        timerSlideEl.textContent = formatDuration(remaining);
+        timerSlideEl.style.color = remaining < 0 ? "#f87171" : "#f9fafb";
+      } else {
+        timerSlideEl.textContent = formatDuration(elapsed);
+        timerSlideEl.style.color = "#f9fafb";
+      }
+
+      // Total: suma de minutos restantes de slides futuros + tiempo del actual
+      const totalRemainingMinutes = slides
+        .slice(currentIndex + 1)
+        .reduce((sum, s) => sum + (s.estimatedMinutes ?? 0), 0);
+      const remainingCurrent = estimate != null ? Math.max(0, estimate * 60 * 1000 - elapsed) : 0;
+      timerTotalEl.textContent = formatDuration(totalRemainingMinutes * 60 * 1000 + remainingCurrent);
+    }, 500);
+
+    createController({
+      deckSlug: slug,
+      totalSlides: total,
+      viewName: "notes",
+      role: "notes",
+      onChange: renderSlide,
+    });
+  </script>
+</Base>

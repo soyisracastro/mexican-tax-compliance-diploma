@@ -52,12 +52,37 @@
 - **Clases 3-6**: ⏳ POR DEFINIR
   - Estructura: [Pendiente de investigación]
 
-### Módulo 4: [Sin Información Disponible]
+### Módulo 4: ISR para Personas Físicas
 
-- **Objetivo**: [Pendiente de investigación]
-- **Temas Clave**: [Pendiente de investigación]
-- **Número de clases estimadas**: [Pendiente]
-- **Estado**: ⏳ SIN INFORMACIÓN
+- **Objetivo**: Dominar la determinación del ISR aplicable a personas físicas en sus distintos regímenes, el uso correcto de deducciones personales y las herramientas del SAT para cumplimiento y cálculo.
+- **Número de clases**: 2
+- **Duración por clase**: 4 hrs reloj (9:00–13:00 hora centro) / ~3.5 hrs efectivas con receso de 30 min
+
+**Estado de Clases**:
+
+- **Clase 1**: 🔄 CONTENIDO FUENTE LISTO — Regímenes Fiscales de Personas Físicas
+  - **Duración**: 210 min efectivos
+  - **Temas** (7):
+    1. Reglas generales del ISR para personas físicas
+    2. Régimen de sueldos y salarios
+    3. Actividad empresarial y profesional
+    4. Régimen Simplificado de Confianza (RESICO)
+    5. Arrendamiento de inmuebles
+    6. Régimen de Incorporación Fiscal (RIF — en extinción)
+    7. Plataformas digitales
+  - **Archivo fuente**: `modulo-04-isr-personas-fisicas/clase-01-regimenes-fiscales-pf/0401-contenido.md` (1,197 líneas; tarifas 2026, UMA, ejemplos prácticos)
+  - **Pendientes**: `slides-scripts.md`, `ejercicios-practicos.md`, `tablas-comparativas.md`, `README.md`
+
+- **Clase 2**: 🔄 CONTENIDO FUENTE LISTO — Aspectos Prácticos: Deducciones, CFDI y Herramientas SAT
+  - **Duración**: 180 min efectivos
+  - **Temas** (5):
+    1. Deducciones personales permitidas (Art. 151 LISR)
+    2. Pagos provisionales vs declaración anual
+    3. CFDI y deducciones válidas
+    4. Uso del visor de nómina e ingresos/deducciones SAT
+    5. Casos prácticos de cálculo ISR personas físicas
+  - **Archivo fuente**: `modulo-04-isr-personas-fisicas/clase-02-deducciones-cfdi-sat/0402-contenido.md` (1,005 líneas)
+  - **Pendientes**: `slides-scripts.md`, `ejercicios-practicos.md`, `README.md`
 
 ### Módulo 6: [Sin Información Disponible]
 
@@ -81,10 +106,18 @@ modulo-01-fundamentos-sistema-fiscal/
 ├── clase-03-[nombre]/
 └── clase-04-[nombre]/
 
-modulo-04-[nombre]/
-├── clase-01-[nombre]/
-├── clase-02-[nombre]/
-└── ...
+modulo-04-isr-personas-fisicas/
+├── clase-01-regimenes-fiscales-pf/
+│   ├── 0401-contenido.md           # Material fuente (investigación)
+│   ├── slides-scripts.md           # Pendiente
+│   ├── ejercicios-practicos.md     # Pendiente
+│   ├── tablas-comparativas.md      # Pendiente
+│   └── README.md                   # Pendiente
+└── clase-02-deducciones-cfdi-sat/
+    ├── 0402-contenido.md           # Material fuente (investigación)
+    ├── slides-scripts.md           # Pendiente
+    ├── ejercicios-practicos.md     # Pendiente
+    └── README.md                   # Pendiente
 
 modulo-06-[nombre]/
 ├── clase-01-[nombre]/
@@ -199,12 +232,16 @@ Ejemplos:
 
 ## 7. Próximas Acciones
 
-- [ ] Definir temas específicos de Módulos 4 y 6 (según PDF del diplomado)
-- [ ] Crear estructura de carpetas
-- [ ] Desarrollar clase 2 del Módulo 1
+- [x] Definir temas específicos de Módulo 4 (según PDF del diplomado)
+- [x] Crear estructura de carpetas del Módulo 4
+- [ ] Definir temas específicos del Módulo 6 (según PDF del diplomado)
+- [ ] Desarrollar `slides-scripts.md` de la Clase 1 del Módulo 4
+- [ ] Desarrollar `ejercicios-practicos.md` y `tablas-comparativas.md` de la Clase 1 del Módulo 4
+- [ ] Desarrollar `README.md` de la Clase 1 del Módulo 4
+- [ ] Desarrollar `slides-scripts.md` de la Clase 2 del Módulo 4
+- [ ] Desarrollar `ejercicios-practicos.md` y `README.md` de la Clase 2 del Módulo 4
 - [ ] Establecer calendario de entregas
-- [ ] Definir ejercicios prácticos por módulo
-- [ ] Preparar materiales de apoyo (tablas, plantillas, jurisprudencia)
+- [ ] Preparar materiales de apoyo adicionales (jurisprudencia, plantillas)
 
 ---
 
