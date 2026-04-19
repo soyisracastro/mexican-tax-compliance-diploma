@@ -41,8 +41,12 @@ const slides = deck.slides;
     </aside>
 
     <footer class="notes__controls">
-      <span><kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Space</kbd> avanzar</span>
-      <span><kbd>P</kbd> presenter · <kbd>O</kbd> overview</span>
+      <span class="notes__controls-hints"><kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Space</kbd> avanzar · <kbd>P</kbd> presenter</span>
+      <div class="notes__fontsize" role="group" aria-label="Tamaño de fuente del script">
+        <button class="notes__fontsize-btn" id="fs-minus" type="button" aria-label="Reducir tamaño">A−</button>
+        <span class="notes__fontsize-value" id="fs-value">100%</span>
+        <button class="notes__fontsize-btn" id="fs-plus" type="button" aria-label="Aumentar tamaño">A+</button>
+      </div>
     </footer>
   </div>
 
@@ -149,6 +153,67 @@ const slides = deck.slides;
       viewName: "notes",
       role: "notes",
       onChange: renderSlide,
+    });
+
+    // Control de tamaño de fuente — persiste en localStorage
+    const SCALE_KEY = "notes:script-scale";
+    const MIN_SCALE = 0.6;
+    const MAX_SCALE = 2.5;
+    const STEP = 0.1;
+
+    const notesRoot = document.querySelector<HTMLElement>(".notes")!;
+    const fsValue = document.getElementById("fs-value")!;
+    const fsMinus = document.getElementById("fs-minus")!;
+    const fsPlus = document.getElementById("fs-plus")!;
+
+    function clampScale(n: number): number {
+      return Math.max(MIN_SCALE, Math.min(MAX_SCALE, Math.round(n * 10) / 10));
+    }
+
+    function applyScale(scale: number) {
+      const s = clampScale(scale);
+      notesRoot.style.setProperty("--script-scale", String(s));
+      fsValue.textContent = `${Math.round(s * 100)}%`;
+      try {
+        localStorage.setItem(SCALE_KEY, String(s));
+      } catch {
+        /* ignore */
+      }
+    }
+
+    // Cargar escala previa (default 1.0)
+    const stored = (() => {
+      try {
+        const raw = localStorage.getItem(SCALE_KEY);
+        const n = raw ? parseFloat(raw) : NaN;
+        return isNaN(n) ? 1 : n;
+      } catch {
+        return 1;
+      }
+    })();
+    applyScale(stored);
+
+    const currentScale = () =>
+      parseFloat(notesRoot.style.getPropertyValue("--script-scale") || "1");
+
+    fsMinus.addEventListener("click", () => applyScale(currentScale() - STEP));
+    fsPlus.addEventListener("click", () => applyScale(currentScale() + STEP));
+
+    // Keybindings: + aumenta, - disminuye, 0 resetea
+    window.addEventListener("keydown", (e) => {
+      const t = e.target as HTMLElement | null;
+      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key === "+" || e.key === "=") {
+        e.preventDefault();
+        applyScale(currentScale() + STEP);
+      } else if (e.key === "-" || e.key === "_") {
+        e.preventDefault();
+        applyScale(currentScale() - STEP);
+      } else if (e.key === "0") {
+        e.preventDefault();
+        applyScale(1);
+      }
     });
   </script>
 </Base>
