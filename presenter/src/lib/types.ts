@@ -11,6 +11,8 @@ export interface Slide {
   scriptText: string;
   /** Bloque temático al que pertenece (si aplica) */
   blockTitle: string | null;
+  /** Icono Lucide del bloque, ej. "briefcase" (si aplica) */
+  blockIcon: string | null;
   /** Minutos estimados para todo el bloque (si aplica) */
   blockMinutes: number | null;
   /** Minutos estimados para este slide (blockMinutes / slides del bloque) */

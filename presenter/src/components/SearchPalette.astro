@@ -1,0 +1,209 @@
+---
+/**
+ * Buscador tipo command palette que se abre con Ctrl+K / Cmd+K.
+ *
+ * Busca por título de slide + contenido visual; al seleccionar hace
+ * sync.post({ type: "goto", ... }) y la vista actual navega al slide.
+ *
+ * Requiere que la página que lo incluya pase la lista de slides como JSON.
+ */
+import type { Slide } from "../lib/types";
+
+interface Props {
+  /** Slug del deck para broadcast sync */
+  deckSlug: string;
+  /** Lista de slides del deck */
+  slides: Slide[];
+}
+
+const { deckSlug, slides } = Astro.props;
+
+// Datos minimalistas para el cliente — solo lo que necesita el buscador
+const searchData = slides.map((s, i) => ({
+  index: i,
+  number: s.number,
+  title: s.title,
+  block: s.blockTitle,
+  // Texto plano extraído del HTML para búsqueda
+  body: s.contentHtml
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 200),
+}));
+---
+
+<div class="palette" id="search-palette" data-deck-slug={deckSlug} hidden>
+  <div class="palette__backdrop" data-palette-close></div>
+  <div class="palette__dialog" role="dialog" aria-label="Buscar slide">
+    <div class="palette__input-wrap">
+      <span class="palette__icon" aria-hidden="true">⌕</span>
+      <input
+        type="text"
+        class="palette__input"
+        placeholder="Buscar slide por título o contenido…"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <span class="palette__hint">Esc</span>
+    </div>
+    <ul class="palette__results" role="listbox"></ul>
+  </div>
+</div>
+
+<script
+  is:inline
+  id="search-data"
+  type="application/json"
+  set:html={JSON.stringify(searchData)}
+/>
+
+<script>
+  import Fuse from "fuse.js";
+  import { createSync } from "../scripts/sync";
+
+  interface SearchItem {
+    index: number;
+    number: number;
+    title: string;
+    block: string | null;
+    body: string;
+  }
+
+  const palette = document.getElementById("search-palette")!;
+  const dialog = palette.querySelector<HTMLElement>(".palette__dialog")!;
+  const input = palette.querySelector<HTMLInputElement>(".palette__input")!;
+  const resultsEl = palette.querySelector<HTMLUListElement>(".palette__results")!;
+  const deckSlug = palette.dataset.deckSlug!;
+  const sync = createSync(deckSlug);
+
+  const data: SearchItem[] = JSON.parse(
+    document.getElementById("search-data")!.textContent ?? "[]"
+  );
+
+  const fuse = new Fuse(data, {
+    keys: [
+      { name: "title", weight: 0.6 },
+      { name: "block", weight: 0.25 },
+      { name: "body", weight: 0.15 },
+    ],
+    threshold: 0.4,
+    ignoreLocation: true,
+  });
+
+  let selectedIndex = 0;
+  let currentResults: SearchItem[] = [];
+
+  function render(query: string) {
+    const trimmed = query.trim();
+    currentResults = trimmed
+      ? fuse.search(trimmed, { limit: 8 }).map((r) => r.item)
+      : data.slice(0, 8);
+
+    selectedIndex = 0;
+    resultsEl.innerHTML = currentResults
+      .map(
+        (item, idx) => `
+          <li class="palette__item${idx === 0 ? " palette__item--active" : ""}"
+              data-idx="${idx}" role="option">
+            <span class="palette__item-num">Slide ${item.number}</span>
+            <div class="palette__item-body">
+              <span class="palette__item-title">${escapeHtml(item.title)}</span>
+              ${item.block ? `<span class="palette__item-block">${escapeHtml(item.block)}</span>` : ""}
+            </div>
+          </li>`
+      )
+      .join("");
+  }
+
+  function escapeHtml(s: string): string {
+    return s
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function updateSelection() {
+    resultsEl
+      .querySelectorAll<HTMLElement>(".palette__item")
+      .forEach((el, idx) => {
+        el.classList.toggle("palette__item--active", idx === selectedIndex);
+        if (idx === selectedIndex) el.scrollIntoView({ block: "nearest" });
+      });
+  }
+
+  function selectCurrent() {
+    const item = currentResults[selectedIndex];
+    if (!item) return;
+    sync.post({ type: "goto", slideIndex: item.index, source: "palette" });
+    close();
+  }
+
+  function open() {
+    palette.hidden = false;
+    input.value = "";
+    render("");
+    setTimeout(() => input.focus(), 0);
+  }
+
+  function close() {
+    palette.hidden = true;
+  }
+
+  // Abrir con evento global emitido por el controller
+  window.addEventListener("deck:search-open", open);
+
+  // También se puede abrir desde la propia página
+  window.addEventListener("keydown", (e) => {
+    if ((e.ctrlKey || e.metaKey) && (e.key === "k" || e.key === "K")) {
+      e.preventDefault();
+      palette.hidden ? open() : close();
+    }
+  });
+
+  // Cerrar al hacer click en el backdrop
+  palette
+    .querySelectorAll<HTMLElement>("[data-palette-close]")
+    .forEach((el) => el.addEventListener("click", close));
+
+  // Evitar cerrar al click dentro del dialog
+  dialog.addEventListener("click", (e) => e.stopPropagation());
+
+  input.addEventListener("input", () => render(input.value));
+
+  input.addEventListener("keydown", (e) => {
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        if (currentResults.length > 0) {
+          selectedIndex = (selectedIndex + 1) % currentResults.length;
+          updateSelection();
+        }
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        if (currentResults.length > 0) {
+          selectedIndex =
+            (selectedIndex - 1 + currentResults.length) % currentResults.length;
+          updateSelection();
+        }
+        break;
+      case "Enter":
+        e.preventDefault();
+        selectCurrent();
+        break;
+      case "Escape":
+        e.preventDefault();
+        close();
+        break;
+    }
+  });
+
+  resultsEl.addEventListener("click", (e) => {
+    const target = (e.target as HTMLElement).closest<HTMLElement>(".palette__item");
+    if (!target) return;
+    selectedIndex = parseInt(target.dataset.idx ?? "0", 10);
+    selectCurrent();
+  });
+</script>

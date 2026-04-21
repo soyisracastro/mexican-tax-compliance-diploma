@@ -57,7 +57,7 @@ Si en algún momento algo no queda claro, levanten la mano. Es más eficiente re
 
 ---
 
-# BLOQUE 1 — REGLAS GENERALES DEL ISR PARA PERSONAS FÍSICAS (35 min)
+# BLOQUE 1 — REGLAS GENERALES DEL ISR PARA PERSONAS FÍSICAS (35 min) {icon: scale}
 
 ---
 
@@ -227,7 +227,7 @@ Clase 2 entramos al detalle de cada fracción."
 
 ---
 
-# BLOQUE 2 — RÉGIMEN DE SUELDOS Y SALARIOS (35 min)
+# BLOQUE 2 — RÉGIMEN DE SUELDOS Y SALARIOS (35 min) {icon: briefcase}
 
 ---
 
@@ -378,7 +378,7 @@ Un detalle operativo: en la realidad el cálculo lo hace el sistema de nómina e
 
 ---
 
-# BLOQUE 3 — ACTIVIDAD EMPRESARIAL Y PROFESIONAL (35 min)
+# BLOQUE 3 — ACTIVIDAD EMPRESARIAL Y PROFESIONAL (35 min) {icon: building-2}
 
 ---
 
@@ -509,7 +509,7 @@ Tomen agua, estiren, y nos vemos a las 11:15 en punto."
 
 ---
 
-# BLOQUE 4 — RÉGIMEN SIMPLIFICADO DE CONFIANZA (RESICO) · 40 min
+# BLOQUE 4 — RÉGIMEN SIMPLIFICADO DE CONFIANZA (RESICO) (40 min) {icon: sparkles}
 
 ---
 
@@ -704,7 +704,7 @@ Diferencia: $16,363 al mes de ahorro. $196,356 al año. Por eso RESICO es la opc
 
 ---
 
-# BLOQUE 5 — ARRENDAMIENTO DE INMUEBLES (25 min)
+# BLOQUE 5 — ARRENDAMIENTO DE INMUEBLES (25 min) {icon: key-round}
 
 ---
 
@@ -809,7 +809,7 @@ Misma renta, menos ISR anual, menos burocracia, saldo a favor mínimo. Para la g
 
 ---
 
-# BLOQUE 6 — RÉGIMEN DE INCORPORACIÓN FISCAL (RIF) · 15 min
+# BLOQUE 6 — RÉGIMEN DE INCORPORACIÓN FISCAL (RIF) (15 min) {icon: archive}
 
 ---
 
@@ -841,7 +841,7 @@ Avanzamos."
 
 ---
 
-# BLOQUE 7 — PLATAFORMAS DIGITALES (25 min)
+# BLOQUE 7 — PLATAFORMAS DIGITALES (25 min) {icon: smartphone}
 
 ---
 
@@ -954,7 +954,7 @@ Si el conductor pasa de $300,000 al año —que lo alcanza fácilmente un conduc
 
 ---
 
-# CIERRE DE LA CLASE
+# CIERRE DE LA CLASE {icon: flag}
 
 ---
 

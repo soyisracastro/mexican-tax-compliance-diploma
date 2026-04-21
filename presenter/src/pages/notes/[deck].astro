@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import SearchPalette from "../../components/SearchPalette.astro";
 import { loadAllDecks } from "../../lib/parseSlides";
 import type { GetStaticPaths } from "astro";
 
@@ -41,7 +42,7 @@ const slides = deck.slides;
     </aside>
 
     <footer class="notes__controls">
-      <span class="notes__controls-hints"><kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Space</kbd> avanzar · <kbd>P</kbd> presenter</span>
+      <span class="notes__controls-hints"><kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>Space</kbd> avanzar · <kbd>P</kbd> presenter · <kbd>⌘K</kbd> buscar</span>
       <div class="notes__fontsize" role="group" aria-label="Tamaño de fuente del script">
         <button class="notes__fontsize-btn" id="fs-minus" type="button" aria-label="Reducir tamaño">A−</button>
         <span class="notes__fontsize-value" id="fs-value">100%</span>
@@ -49,6 +50,8 @@ const slides = deck.slides;
       </div>
     </footer>
   </div>
+
+  <SearchPalette deckSlug={deck.slug} slides={slides} />
 
   <!-- Datos inyectados como JSON para acceso en cliente -->
   <script is:inline id="slides-data" type="application/json" set:html={JSON.stringify(

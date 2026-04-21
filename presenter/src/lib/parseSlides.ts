@@ -77,15 +77,26 @@ export function parseDeck(filePath: string, repoRoot: string): Deck {
   const blockHeadingRe = /^#\s+(BLOQUE\s+\d+[^\n]*|CIERRE[^\n]*)$/gm;
 
   // Recolectar posiciones de bloques para anclar slides al bloque más cercano previo
-  type BlockAnchor = { start: number; title: string; minutes: number | null };
+  type BlockAnchor = {
+    start: number;
+    title: string;
+    minutes: number | null;
+    icon: string | null;
+  };
   const blocks: BlockAnchor[] = [];
   for (const m of body.matchAll(blockHeadingRe)) {
     const rawTitle = m[1].trim();
     const minMatch = rawTitle.match(/\((\d+)\s*min\)/i);
+    // Parsear directiva {icon: nombre} opcional
+    const iconMatch = rawTitle.match(/\{\s*icon:\s*([a-z0-9-]+)\s*\}/i);
+    let title = rawTitle;
+    if (iconMatch) title = title.replace(iconMatch[0], "").trim();
+    title = title.replace(/\s*\(\d+\s*min\)\s*$/i, "").trim();
     blocks.push({
       start: m.index ?? 0,
-      title: rawTitle.replace(/\s*\(\d+\s*min\)\s*$/i, "").trim(),
+      title,
       minutes: minMatch ? parseInt(minMatch[1], 10) : null,
+      icon: iconMatch ? iconMatch[1].toLowerCase() : null,
     });
   }
 
@@ -125,7 +136,7 @@ export function parseDeck(filePath: string, repoRoot: string): Deck {
 
   const slides: Slide[] = slidesRaw.map((s) => {
     const section = body.slice(s.start, s.end);
-    const { contentHtml, scriptHtml, scriptText } = extractSlideSections(section);
+    const { contentHtml, scriptHtml, scriptText } = extractSlideSections(section, slug);
     const block = findBlock(s.start);
     const slidesInBlock = block ? slidesPerBlock.get(block.start) ?? 1 : 1;
     const estimatedMinutes =
@@ -137,6 +148,7 @@ export function parseDeck(filePath: string, repoRoot: string): Deck {
       scriptHtml,
       scriptText,
       blockTitle: block?.title ?? null,
+      blockIcon: block?.icon ?? null,
       blockMinutes: block?.minutes ?? null,
       estimatedMinutes,
     };
@@ -162,7 +174,7 @@ export function parseDeck(filePath: string, repoRoot: string): Deck {
  *
  * Las secciones son opcionales y están delimitadas por "### Contenido Visual" y "### Script".
  */
-function extractSlideSections(section: string): {
+function extractSlideSections(section: string, slug: string): {
   contentHtml: string;
   scriptHtml: string;
   scriptText: string;
@@ -184,11 +196,35 @@ function extractSlideSections(section: string): {
   // Limpiar el trailing "---" si quedó
   const clean = (s: string) => s.replace(/\n---\s*$/g, "").trim();
 
-  const contentHtml = contentRaw ? (marked.parse(clean(contentRaw), { async: false }) as string) : "";
-  const scriptHtml = scriptRaw ? (marked.parse(clean(scriptRaw), { async: false }) as string) : "";
+  const renderer = buildImageRewritingRenderer(slug);
+
+  const contentHtml = contentRaw
+    ? (marked.parse(clean(contentRaw), { async: false, renderer }) as string)
+    : "";
+  const scriptHtml = scriptRaw
+    ? (marked.parse(clean(scriptRaw), { async: false, renderer }) as string)
+    : "";
   const scriptText = clean(scriptRaw);
 
   return { contentHtml, scriptHtml, scriptText };
+}
+
+/**
+ * Renderer de marked que reescribe rutas relativas `./images/X` (o `images/X`)
+ * a `/images/<slug>/X` para que Astro sirva las imágenes copiadas por
+ * copyImages() desde `presenter/public/images/<slug>/`.
+ */
+function buildImageRewritingRenderer(slug: string) {
+  const renderer = new marked.Renderer();
+  const originalImage = renderer.image.bind(renderer);
+  renderer.image = function ({ href, title, text }) {
+    let rewritten = href ?? "";
+    if (rewritten.startsWith("./images/") || rewritten.startsWith("images/")) {
+      rewritten = rewritten.replace(/^\.?\/?images\//, `/images/${slug}/`);
+    }
+    return originalImage({ href: rewritten, title, text });
+  };
+  return renderer;
 }
 
 /**

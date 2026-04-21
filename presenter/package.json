@@ -14,9 +14,12 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
+    "@lucide/astro": "^0.563.0",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.15",
+    "chokidar": "^5.0.0",
     "clsx": "^2.1.1",
+    "fuse.js": "^7.3.0",
     "marked": "^14.1.4",
     "tailwind-merge": "^2.5.5",
     "tailwindcss": "^4.1.18",

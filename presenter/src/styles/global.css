@@ -298,6 +298,248 @@
   border-radius: 0;
 }
 
+/* =========================================================
+   Spotlight — foco circular siguiendo el cursor (hold F)
+========================================================= */
+.spotlight {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  background: rgba(10, 22, 40, 0.72);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  --spot-x: 50vw;
+  --spot-y: 50vh;
+  --spot-radius: 140px;
+  -webkit-mask-image: radial-gradient(
+    circle var(--spot-radius) at var(--spot-x) var(--spot-y),
+    transparent 0%,
+    transparent 85%,
+    black 100%
+  );
+  mask-image: radial-gradient(
+    circle var(--spot-radius) at var(--spot-x) var(--spot-y),
+    transparent 0%,
+    transparent 85%,
+    black 100%
+  );
+}
+
+.spotlight--active {
+  opacity: 1;
+}
+
+/* =========================================================
+   Overlay buffer numérico "Ir a slide: N_"
+========================================================= */
+.number-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  padding: 1.25rem 2rem;
+  background: color-mix(in srgb, var(--background) 92%, transparent);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  box-shadow: 0 30px 60px -20px rgba(10, 22, 40, 0.25);
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--foreground);
+  letter-spacing: -0.02em;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.number-overlay__label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--foreground-ghost);
+  margin-bottom: 0.35rem;
+}
+
+.number-overlay__value {
+  color: var(--primary);
+}
+
+.number-overlay__cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.75rem;
+  background: var(--primary);
+  vertical-align: middle;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* =========================================================
+   Search palette (Ctrl+K)
+========================================================= */
+.palette {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 12vh;
+}
+
+.palette[hidden] {
+  display: none;
+}
+
+.palette__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 22, 40, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.palette__dialog {
+  position: relative;
+  width: min(640px, 92vw);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  box-shadow: 0 40px 80px -30px rgba(10, 22, 40, 0.35);
+  overflow: hidden;
+  font-family: var(--font-sans);
+}
+
+.palette__input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.palette__icon {
+  font-size: 1.25rem;
+  color: var(--foreground-ghost);
+}
+
+.palette__input {
+  flex: 1;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  font-size: 1.05rem;
+  font-family: var(--font-sans);
+  color: var(--foreground);
+  padding: 0.25rem 0;
+}
+
+.palette__input::placeholder {
+  color: var(--foreground-ghost);
+}
+
+.palette__hint {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 0.2em 0.5em;
+  border-radius: 0.25rem;
+  background: var(--muted);
+  color: var(--foreground-quiet);
+  border: 1px solid var(--border);
+}
+
+.palette__results {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.palette__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 0.45rem;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.palette__item:hover,
+.palette__item--active {
+  background: var(--accent);
+}
+
+.palette__item-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--primary);
+  min-width: 4.5em;
+  padding-top: 0.15rem;
+}
+
+.palette__item-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.palette__item-title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--foreground);
+  line-height: 1.3;
+}
+
+.palette__item-block {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--foreground-ghost);
+  margin-top: 0.25rem;
+}
+
+/* =========================================================
+   Imágenes en slides
+========================================================= */
+.slide__body img {
+  display: block;
+  margin: 1.25rem auto;
+  max-width: 100%;
+  max-height: 55vh;
+  border-radius: 0.5rem;
+  box-shadow: 0 24px 60px -30px rgba(10, 22, 40, 0.25);
+  border: 1px solid var(--border-soft);
+}
+
+/* Imagen sola (o dentro de un párrafo sin texto) en el body → variante hero */
+.slide__body > p:has(> img:only-child):only-child img,
+.slide__body > img:only-child {
+  max-height: 70vh;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+/* Si la imagen es el primer elemento del body, darle más aire arriba */
+.slide__body > p:first-child:has(> img) {
+  margin-top: 0;
+}
+
 /* Tablas tipo Gamma — sin bordes duros, tipografía limpia */
 .slide__body table {
   width: 100%;
@@ -338,6 +580,9 @@
 .hud {
   position: fixed;
   z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 600;
@@ -353,9 +598,12 @@
   border: 1px solid var(--border-soft);
   box-shadow: 0 1px 2px rgba(10, 22, 40, 0.03);
   max-width: calc(100vw - 4rem);
+  white-space: nowrap;
+}
+
+.hud__block {
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .hud--top-left { top: 1.25rem; left: 1.5rem; }
@@ -369,6 +617,22 @@
 
 .hud__block {
   color: var(--primary);
+}
+
+.hud__icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary);
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+.hud__icon:empty {
+  display: none;
+}
+
+.hud__icon svg {
+  display: block;
 }
 
 /* Barra de progreso inferior */

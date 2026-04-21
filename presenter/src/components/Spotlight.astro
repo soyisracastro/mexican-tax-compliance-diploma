@@ -1,0 +1,73 @@
+---
+/**
+ * Overlay de "spotlight" — mantén presionada la tecla F (o toca F una vez para
+ * fijar) y el resto del slide se oscurece dejando un círculo iluminado que
+ * sigue al cursor. Útil para enfocar la atención en una tabla grande o un
+ * renglón específico.
+ *
+ * - F (mantén): activa mientras presiones
+ * - F (toca): toggle permanente (vuelve a tocar para desactivar)
+ * - Esc: desactiva
+ */
+---
+
+<div class="spotlight" id="spotlight" aria-hidden="true"></div>
+
+<script>
+  const overlay = document.getElementById("spotlight")!;
+  let active = false;
+  let pressed = false;
+  let pressStart = 0;
+
+  function setPosition(x: number, y: number) {
+    overlay.style.setProperty("--spot-x", `${x}px`);
+    overlay.style.setProperty("--spot-y", `${y}px`);
+  }
+
+  function activate() {
+    if (active) return;
+    active = true;
+    overlay.classList.add("spotlight--active");
+  }
+
+  function deactivate() {
+    if (!active) return;
+    active = false;
+    overlay.classList.remove("spotlight--active");
+  }
+
+  window.addEventListener("mousemove", (e) => {
+    if (active) setPosition(e.clientX, e.clientY);
+  });
+
+  window.addEventListener("keydown", (e) => {
+    const target = e.target as HTMLElement | null;
+    if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable)) {
+      return;
+    }
+    if (e.repeat) return;
+    if (e.key === "f" || e.key === "F") {
+      e.preventDefault();
+      pressed = true;
+      pressStart = Date.now();
+      // posicionar en el cursor la primera vez (si no tenemos coords aún)
+      if (!overlay.style.getPropertyValue("--spot-x")) {
+        setPosition(window.innerWidth / 2, window.innerHeight / 2);
+      }
+      activate();
+    } else if (e.key === "Escape" && active) {
+      deactivate();
+    }
+  });
+
+  window.addEventListener("keyup", (e) => {
+    if (e.key !== "f" && e.key !== "F") return;
+    pressed = false;
+    const heldMs = Date.now() - pressStart;
+    // Toque corto (<250ms) → toggle; mantener prolongado → soltar desactiva
+    if (heldMs >= 250) {
+      deactivate();
+    }
+    // Si fue toque corto, el spotlight se queda activado hasta siguiente toque/Esc
+  });
+</script>

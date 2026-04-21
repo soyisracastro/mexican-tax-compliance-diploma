@@ -21,6 +21,8 @@ export interface ControllerOptions {
   viewName: string;
   /** Si está en `notes`, las flechas ↑↓ desplazan el script, no cambian de slide. */
   role?: "presenter" | "notes" | "overview";
+  /** Callback opcional para mostrar/actualizar el overlay del buffer numérico. */
+  onNumberBuffer?: (buffer: string) => void;
 }
 
 export interface Controller {
@@ -35,7 +37,7 @@ export interface Controller {
 }
 
 export function createController(opts: ControllerOptions): Controller {
-  const { deckSlug, totalSlides, onChange, viewName, role = "presenter" } = opts;
+  const { deckSlug, totalSlides, onChange, viewName, role = "presenter", onNumberBuffer } = opts;
 
   // Estado inicial: lee de URL ?slide=N, luego de localStorage, luego 0
   let index = initialIndex(totalSlides);
@@ -75,11 +77,55 @@ export function createController(opts: ControllerOptions): Controller {
   const first = () => set(0);
   const last = () => set(totalSlides - 1);
 
+  // Buffer numérico para "ir a slide N" (ej. 2-5-Enter → slide 25)
+  let numberBuffer = "";
+  let numberTimer: ReturnType<typeof setTimeout> | null = null;
+
+  const clearNumberBuffer = () => {
+    numberBuffer = "";
+    if (numberTimer) {
+      clearTimeout(numberTimer);
+      numberTimer = null;
+    }
+    onNumberBuffer?.("");
+  };
+
+  const appendDigit = (digit: string) => {
+    numberBuffer += digit;
+    onNumberBuffer?.(numberBuffer);
+    if (numberTimer) clearTimeout(numberTimer);
+    numberTimer = setTimeout(clearNumberBuffer, 1500);
+  };
+
+  const commitNumber = () => {
+    if (!numberBuffer) return false;
+    const n = parseInt(numberBuffer, 10);
+    if (!isNaN(n) && n >= 1 && n <= totalSlides) {
+      set(n - 1);
+    }
+    clearNumberBuffer();
+    return true;
+  };
+
   // Keybindings
   const onKey = (e: KeyboardEvent) => {
     // Ignorar si el usuario está escribiendo en un input/textarea
     const target = e.target as HTMLElement | null;
     if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable)) {
+      return;
+    }
+
+    // Ctrl/Cmd + K abre el buscador (lo maneja el componente, emitimos un evento)
+    if ((e.ctrlKey || e.metaKey) && (e.key === "k" || e.key === "K")) {
+      e.preventDefault();
+      window.dispatchEvent(new CustomEvent("deck:search-open"));
+      return;
+    }
+
+    // Dígitos: acumula en buffer (solo si no hay Ctrl/Meta)
+    if (!e.ctrlKey && !e.metaKey && !e.altKey && /^[0-9]$/.test(e.key)) {
+      e.preventDefault();
+      appendDigit(e.key);
       return;
     }
 
@@ -103,6 +149,9 @@ export function createController(opts: ControllerOptions): Controller {
         e.preventDefault();
         last();
         break;
+      case "Enter":
+        if (commitNumber()) e.preventDefault();
+        break;
       case "n":
       case "N":
         // Abre la vista de notas en nueva pestaña
@@ -118,6 +167,11 @@ export function createController(opts: ControllerOptions): Controller {
         openView("overview", deckSlug, index);
         break;
       case "Escape":
+        if (numberBuffer) {
+          clearNumberBuffer();
+          e.preventDefault();
+          return;
+        }
         if (role === "overview") {
           openView("presenter", deckSlug, index, true);
         }

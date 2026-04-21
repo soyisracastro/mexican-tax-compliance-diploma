@@ -1,0 +1,34 @@
+---
+/**
+ * Renderiza un icono Lucide a partir de su nombre kebab-case (ej. "briefcase",
+ * "building-2", "calculator"). Si el nombre no existe en Lucide, no renderiza nada.
+ *
+ * Uso:
+ *   <BlockIcon name="briefcase" size={16} />
+ *
+ * Lista completa de iconos: https://lucide.dev/icons/
+ */
+import { icons } from "@lucide/astro";
+
+interface Props {
+  name: string | null;
+  size?: number;
+  strokeWidth?: number;
+  class?: string;
+}
+
+const { name, size = 16, strokeWidth = 2, class: className = "" } = Astro.props;
+
+function toPascalCase(kebab: string): string {
+  return kebab
+    .split("-")
+    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+    .join("");
+}
+
+const Icon = name
+  ? (icons as Record<string, unknown>)[toPascalCase(name)]
+  : null;
+---
+
+{Icon && <Icon size={size} strokeWidth={strokeWidth} class:list={className} />}
