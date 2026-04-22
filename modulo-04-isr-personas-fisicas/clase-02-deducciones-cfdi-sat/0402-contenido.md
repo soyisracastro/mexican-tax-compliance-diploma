@@ -135,8 +135,8 @@ El banco proporciona esta información en la constancia de intereses.
 - Planes personales de retiro (PPR)
 - Cuentas especiales para el ahorro
 
-**Límite individual:** 10% de los ingresos acumulables, sin exceder 5 UMAs anuales
-- 5 UMAs 2026: $213,973.20 (desde febrero)
+**Límite individual:** 10% de los ingresos acumulables, sin exceder 5 salarios mínimos generales del área geográfica del contribuyente elevados al año *(texto literal Art. 151 fracción V LISR — la ley NO referencia UMA en esta fracción)*
+- 5 SMG 2026: $574,948.00 (5 × $315.04 diarios × 365 días)
 
 **IMPORTANTE:** Esta deducción está EXCLUIDA del límite global de deducciones personales.
 
@@ -160,7 +160,9 @@ El banco proporciona esta información en la constancia de intereses.
 
 **Uso de CFDI:** **D08** (Gastos de transportación escolar obligatoria)
 
-#### FRACCIÓN VIII - Depósitos en Cuentas para el Ahorro
+#### ART. 185 LISR - Depósitos en Cuentas para el Ahorro
+
+> **Nota normativa:** Este beneficio **no está en el Art. 151** sino en el **Art. 185 LISR** (Título VII, Capítulo I). Es técnicamente un *estímulo fiscal*, no una deducción personal del capítulo de deducciones personales. Opera distinto: se resta directamente de la base a la que se aplica la tarifa del Art. 152. El material usualmente lo incluye en la lista de deducciones personales por conveniencia pedagógica, pero la cita normativa correcta siempre es Art. 185, no Art. 151 fracción VIII.
 
 **Límite máximo:** $152,000 anuales (incluye cualquiera de estos conceptos)
 - Cuentas personales especiales para el ahorro
@@ -229,10 +231,10 @@ El monto total de deducciones personales no puede exceder de la cantidad que res
 | II | Funerarios | D03 | 1 UMA anual | SÍ |
 | III | Donativos | D04 | 7% ing. acum. anterior | SÍ |
 | IV | Int. hipotecarios | D05 | Crédito ≤750,000 UDIs | SÍ |
-| V | Aport. retiro | D06 | 10% ing./5 UMAs | NO |
+| V | Aport. retiro | D06 | 10% ing. / 5 SMG anuales ($574,948) | NO |
 | VI | Seguros médicos | D07 | Sin límite individual | SÍ |
 | VII | Transp. escolar | D08 | Obligatoria | SÍ |
-| VIII | Cuentas ahorro | D09 | $152,000 | NO |
+| Art. 185 | Cuentas ahorro | D09 | $152,000 | NO |
 | Decreto | Colegiaturas | D10 | Por nivel educativo | NO |
 
 ---
@@ -640,7 +642,43 @@ Herramienta del SAT que muestra las facturas que han sido clasificadas como dedu
 - 5 UMAs (feb-dic): $213,973.20
 - O 15% de ingresos totales (lo que sea menor)
 
-**Subsidio para el empleo 2026:** $536.21 mensuales (enero)
+**Subsidio para el empleo 2026:** $536.21 mensuales (enero) / $535.65 mensuales (febrero–diciembre)
+
+### 5.1.1 Tarifa Anual Art. 152 LISR 2026
+
+*(Anexo 8 RMF 2026, DOF 28/12/2025 — factor de actualización 1.13213)*
+
+| Límite Inferior | Límite Superior | Cuota Fija | % Sobre Excedente |
+|---|---|---|---|
+| $0.01 | $10,135.11 | $0.00 | 1.92% |
+| $10,135.12 | $86,022.11 | $194.59 | 6.40% |
+| $86,022.12 | $151,176.19 | $5,051.37 | 10.88% |
+| $151,176.20 | $175,735.66 | $12,140.13 | 16.00% |
+| $175,735.67 | $210,403.69 | $16,069.64 | 17.92% |
+| $210,403.70 | $424,353.97 | $22,282.14 | 21.36% |
+| $424,353.98 | $668,840.14 | $67,981.92 | 23.52% |
+| $668,840.15 | $1,276,925.98 | $125,485.07 | 30.00% |
+| $1,276,925.99 | $1,702,567.97 | $307,910.81 | 32.00% |
+| $1,702,567.98 | $5,107,703.92 | $444,116.23 | 34.00% |
+| $5,107,703.93 | En adelante | $1,601,862.46 | 35.00% |
+
+### 5.1.2 Tarifa Mensual Art. 96 LISR 2026
+
+*(Misma fuente — para retenciones por salarios y pagos provisionales)*
+
+| Límite Inferior | Límite Superior | Cuota Fija | % Sobre Excedente |
+|---|---|---|---|
+| $0.01 | $844.59 | $0.00 | 1.92% |
+| $844.60 | $7,168.51 | $16.22 | 6.40% |
+| $7,168.52 | $12,598.02 | $420.95 | 10.88% |
+| $12,598.03 | $14,644.64 | $1,011.68 | 16.00% |
+| $14,644.65 | $17,533.64 | $1,339.14 | 17.92% |
+| $17,533.65 | $35,362.83 | $1,856.84 | 21.36% |
+| $35,362.84 | $55,736.68 | $5,665.16 | 23.52% |
+| $55,736.69 | $106,410.50 | $10,457.09 | 30.00% |
+| $106,410.51 | $141,880.66 | $25,659.23 | 32.00% |
+| $141,880.67 | $425,641.99 | $37,009.69 | 34.00% |
+| $425,642.00 | En adelante | $133,488.54 | 35.00% |
 
 ### 5.2 CASO PRÁCTICO 1: Asalariado con Deducciones Personales
 
@@ -688,26 +726,26 @@ BASE GRAVABLE
 $480,000.00 - $78,900.00 =                      $401,100.00
 
 APLICACIÓN TARIFA ART. 152 LISR 2026
-(Rangos actualizados con factor 1.04628)
+(Anexo 8 RMF 2026, DOF 28/12/2025 — factor 1.13213)
 
 $401,100.00 cae en el rango:
-Límite inferior: $374,835.86
-Cuota fija: $62,141.83
-% sobre excedente: 30%
+Límite inferior: $210,403.70
+Cuota fija: $22,282.14
+% sobre excedente: 21.36%
 
-Excedente: $401,100.00 - $374,835.86 = $26,264.14
-ISR marginal: $26,264.14 × 30% = $7,879.24
+Excedente: $401,100.00 - $210,403.70 = $190,696.30
+ISR marginal: $190,696.30 × 21.36% = $40,732.73
 
-ISR DEL EJERCICIO: $62,141.83 + $7,879.24 =      $70,021.07
+ISR DEL EJERCICIO: $22,282.14 + $40,732.73 =       $63,014.87
 
 ACREDITAMIENTOS
 (-) ISR retenido                                ($62,000.00)
 
 RESULTADO
-ISR A CARGO                                       $8,021.07
+ISR A CARGO                                        $1,014.87
 ```
 
-**Análisis:** María debe pagar $8,021.07 adicionales porque sus deducciones personales redujeron la base gravable pero no compensaron completamente la diferencia con las retenciones.
+**Análisis:** María debe pagar $1,014.87 adicionales. Las deducciones personales ($78,900) redujeron su base gravable de $480,000 a $401,100 y, combinadas con las retenciones del patrón ($62,000), cubren casi la totalidad del ISR del ejercicio.
 
 ---
 
@@ -765,7 +803,7 @@ Gastos médicos permitidos                       $30,000.00 ✓
 
 Aportaciones PPR:
 - Límite 10% ingresos = $120,000
-- Límite 5 UMAs = $213,973.20
+- Límite 5 SMG anuales = $574,948.00 (5 × $315.04 × 365) — la ley cita SMG, no UMA
 - Aportación real = $48,000
 Aportación PPR deducible                        $48,000.00
 
@@ -775,22 +813,24 @@ BASE GRAVABLE
 $1,015,000.00 - $78,000.00 =                   $937,000.00
 
 APLICACIÓN TARIFA ART. 152 LISR 2026
+(Anexo 8 RMF 2026, DOF 28/12/2025 — factor 1.13213)
+
 $937,000.00 cae en el rango:
-Límite inferior: $749,671.73
-Cuota fija: $174,503.89
-% sobre excedente: 32%
+Límite inferior: $668,840.15
+Cuota fija: $125,485.07
+% sobre excedente: 30%
 
-Excedente: $937,000.00 - $749,671.73 = $187,328.27
-ISR marginal: $187,328.27 × 32% = $59,945.05
+Excedente: $937,000.00 - $668,840.15 = $268,159.85
+ISR marginal: $268,159.85 × 30% = $80,447.96
 
-ISR DEL EJERCICIO: $174,503.89 + $59,945.05 =  $234,448.94
+ISR DEL EJERCICIO: $125,485.07 + $80,447.96 =  $205,933.03
 
 ACREDITAMIENTOS
 (-) Pagos provisionales                        ($85,000.00)
 (-) Retenciones de PM                          ($96,000.00)
 
 RESULTADO
-ISR A CARGO                                     $53,448.94
+ISR A CARGO                                     $24,933.03
 ```
 
 ---
@@ -848,25 +888,27 @@ BASE GRAVABLE
 $189,000.00 - $37,000.00 =                     $152,000.00
 
 APLICACIÓN TARIFA ART. 152 LISR 2026
+(Anexo 8 RMF 2026, DOF 28/12/2025 — factor 1.13213)
+
 $152,000.00 cae en el rango:
-Límite inferior: $145,770.28
-Cuota fija: $15,261.86
-% sobre excedente: 21.36%
+Límite inferior: $151,176.20
+Cuota fija: $12,140.13
+% sobre excedente: 16.00%
 
-Excedente: $152,000.00 - $145,770.28 = $6,229.72
-ISR marginal: $6,229.72 × 21.36% = $1,330.67
+Excedente: $152,000.00 - $151,176.20 = $823.80
+ISR marginal: $823.80 × 16% = $131.81
 
-ISR DEL EJERCICIO: $15,261.86 + $1,330.67 =     $16,592.53
+ISR DEL EJERCICIO: $12,140.13 + $131.81 =        $12,271.94
 
 ACREDITAMIENTOS
 (-) Pagos provisionales                        ($12,000.00)
 (-) Retenciones de PM                          ($30,000.00)
 
 RESULTADO
-SALDO A FAVOR                                  ($25,407.47)
+SALDO A FAVOR                                  ($29,728.06)
 ```
 
-**Análisis:** Patricia tiene un saldo a favor de $25,407.47 que puede solicitar en devolución o compensar contra otros impuestos.
+**Análisis:** Patricia tiene un saldo a favor de $29,728.06 que puede solicitar en devolución o compensar. La combinación de deducción ciega (35% + predial), deducciones personales y retenciones del inquilino genera un exceso de pagos significativo.
 
 ---
 
@@ -914,10 +956,15 @@ Si Juan estuviera en régimen general con los mismos ingresos y deducciones esti
 Ingresos: $720,000
 Deducciones (30%): $216,000
 Utilidad fiscal: $504,000
-ISR aproximado (tarifa 152): ~$95,000
+
+$504,000 cae en rango 23.52% (Anexo 8 RMF 2026):
+Cuota fija: $67,981.92
+Excedente: $504,000 - $424,353.98 = $79,646.02
+ISR marginal: $79,646.02 × 23.52% = $18,732.73
+ISR aproximado (tarifa 152): ~$86,715
 ```
 
-**Ahorro en RESICO:** Aproximadamente $85,600 anuales
+**Ahorro en RESICO:** Aproximadamente $77,343 anuales ($86,715 − $9,372)
 
 ---
 
@@ -925,9 +972,9 @@ ISR aproximado (tarifa 152): ~$95,000
 
 | Caso | Régimen | Ingresos | ISR Ejercicio | Retenciones/PP | Resultado |
 |------|---------|----------|---------------|----------------|-----------|
-| 1 | Salarios | $480,000 | $70,021 | $62,000 | A cargo $8,021 |
-| 2 | Profesional | $1,200,000 | $234,449 | $181,000 | A cargo $53,449 |
-| 3 | Arrendamiento | $300,000 | $16,593 | $42,000 | A favor $25,407 |
+| 1 | Salarios | $480,000 | $63,015 | $62,000 | A cargo $1,015 |
+| 2 | Profesional | $1,200,000 | $205,933 | $181,000 | A cargo $24,933 |
+| 3 | Arrendamiento | $300,000 | $12,272 | $42,000 | A favor $29,728 |
 | 4 | RESICO | $720,000 | $9,372 | N/A | Definitivo |
 
 ---
