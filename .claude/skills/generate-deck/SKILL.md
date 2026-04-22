@@ -23,6 +23,7 @@ Si no los proporciona, pregunta antes de generar:
 3. **Audiencia** — ej. contadores, profesionistas, estudiantes (opcional, asumir "contadores públicos mexicanos" por default)
 4. **Ubicación del archivo** — `modulo-N-<slug>/clase-N-<slug>/slides-scripts.md` (preguntar si el usuario no lo sabe)
 5. **Énfasis / enfoque pedagógico** — opcional (ej. "práctico, con cifras 2026", "defensa fiscal", "cálculos paso a paso")
+6. **Archivo fuente de investigación** — opcional pero recomendado. Si el usuario indica una ruta (ej. `modulo-05/.../contenido.md`), **lee ese archivo primero** antes de generar. Los slides deben reflejar las cifras, artículos y ejemplos del archivo fuente con exactitud. Si no hay archivo fuente, el modelo genera con su conocimiento de entrenamiento — en ese caso avisar al usuario que conviene validar cifras 2026.
 
 ## Output esperado
 
