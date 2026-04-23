@@ -2,11 +2,12 @@
 ## Regímenes Fiscales de Personas Físicas
 
 **Datos base 2026:**
-- UMA diaria: $113.14 · mensual: $3,439.46 · anual: $41,311.88
-- Salario mínimo general: $315.04 diario · $9,582.47 mensual
-- Factor de actualización tarifas Art. 152: 1.13213
-- Subsidio para el Empleo máximo: $536.21 mensuales
-- Límite deducciones personales (5 UMA): $206,559.40
+- UMA diaria: $113.14 (enero) · $117.31 (feb-dic) · anual: $42,794.64
+- Salario mínimo general: $315.04 diario · $9,582.47 mensual · $114,989.60 anual
+- Factor de actualización tarifas Art. 152: 1.13213 (Anexo 8 RMF 2026, DOF 28-dic-2025)
+- Subsidio para el Empleo máximo: $536.21 mensuales (ene) · $535.65 mensuales (feb-dic)
+- Límite deducciones personales (5 UMAs anuales): $213,973.20
+- Límite Art. 151 Frac. V PPR/PPAP (5 SMG anuales): $574,948.00
 
 ---
 
@@ -143,19 +144,19 @@ Carga efectiva: 15.96%
 | Concepto | Importe |
 |---|---|
 | Ingreso gravable | $180,000.00 |
-| (−) Límite inferior (escalón $167,424.92–$223,233.22) | $167,424.92 |
-| (=) Excedente | $12,575.08 |
-| (×) Tasa | 32.00% |
-| (=) Impuesto marginal | $4,024.03 |
-| (+) Cuota fija | $43,969.91 |
-| (=) **ISR a retener** | **$47,993.94** |
+| (−) Límite inferior (escalón $141,880.68–$425,643.66) | $141,880.68 |
+| (=) Excedente | $38,119.32 |
+| (×) Tasa | 34.00% |
+| (=) Impuesto marginal | $12,960.57 |
+| (+) Cuota fija | $37,344.33 |
+| (=) **ISR a retener** | **$50,304.90** |
 
-Carga efectiva: 26.66%
+Carga efectiva: 27.95%
 
 ---
 
 **Caso 2D — Discusión**
-Compara las tres cargas efectivas (7.89%, 15.96%, 26.66%). ¿Qué principio constitucional se ilustra?
+Compara las tres cargas efectivas (7.89%, 15.96%, 27.95%). ¿Qué principio constitucional se ilustra?
 
 **Respuesta**: **Proporcionalidad** (Art. 31, frac. IV CPEUM). A mayor capacidad económica real, mayor proporción de contribución. La tarifa progresiva del Art. 152 es el mecanismo operativo de este principio.
 
