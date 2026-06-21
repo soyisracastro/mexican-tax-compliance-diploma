@@ -22,7 +22,7 @@ Instructor — **LCP Israel Castro**
 
 "Buenos días. Bienvenidos a la Clase 1 del Módulo 4. A partir de hoy dejamos atrás los fundamentos generales del sistema fiscal y aterrizamos en el impuesto que más lágrimas y más honorarios genera en este país: el ISR de personas físicas.
 
-Durante los próximos 210 minutos —con un receso de 30 minutos a media mañana— vamos a recorrer los siete regímenes que conviven hoy en el Título IV de la LISR. Van a salir de aquí sabiendo exactamente qué régimen le toca a cada uno de sus clientes, con qué tasa paga, qué deducciones tiene, qué retenciones le aplican y qué decisiones estratégicas pueden tomar —dentro de la ley— para optimizar su carga fiscal.
+Durante los próximas horas —con un receso de 30 minutos a media mañana— vamos a recorrer los siete regímenes que conviven hoy en el Título IV de la LISR. Van a salir de aquí sabiendo exactamente qué régimen le toca a cada uno de sus clientes, con qué tasa paga, qué deducciones tiene, qué retenciones le aplican y qué decisiones estratégicas pueden tomar —dentro de la ley— para optimizar su carga fiscal.
 
 Un dato para encuadrarlos: el Título IV va del artículo 90 al 152 de la LISR. Son 62 artículos organizados en once capítulos. Nosotros hoy vamos a cubrir los más importantes para la práctica diaria.
 
