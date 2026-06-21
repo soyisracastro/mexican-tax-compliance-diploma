@@ -84,12 +84,27 @@
   - **Archivo fuente**: `modulo-04-isr-personas-fisicas/clase-02-deducciones-cfdi-sat/0402-contenido.md` (1,005 líneas)
   - **Pendientes**: `slides-scripts.md`, `ejercicios-practicos.md`, `README.md`
 
-### Módulo 6: [Sin Información Disponible]
+### Módulo 6: Facturación Electrónica y CFDI 4.0
 
-- **Objetivo**: [Pendiente de investigación]
-- **Temas Clave**: [Pendiente de investigación]
-- **Número de clases estimadas**: [Pendiente]
-- **Estado**: ⏳ SIN INFORMACIÓN
+- **Objetivo**: Dominar la facturación electrónica vigente para 2026 (CFDI 4.0), desde su marco legal y complementos hasta su operación práctica con las herramientas del SAT, su validación, cancelación y su impacto en la deducibilidad.
+- **Número de clases**: 2
+- **Duración por clase**: 4 hrs reloj (9:00–13:00 hora centro) / 210 min efectivos con receso de 30 min
+
+**Estado de Clases**:
+
+- **Clase 1**: ✅ DECK COMPLETADO — Fundamentos, Complementos e Impacto Fiscal en Deducciones
+  - **Duración**: 210 min efectivos
+  - **Temas** (6 bloques): marco legal y naturaleza jurídica del CFDI; estructura XML; método/forma de pago (PUE/PPD); campos obligatorios del receptor; complementos (REP 2.0, Carta Porte 3.1, INE); errores frecuentes y cancelación; impacto en deducciones (Art. 27 LISR, Art. 5 LIVA, listas 69-B)
+  - **Archivo fuente**: `modulo-06-facturacion-electronica-cfdi/clase-01-cfdi-fundamentos-complementos/0601-contenido.md`
+  - **Entregado**: `slides-scripts.md` (34 slides, 6 bloques con iconos)
+  - **Pendientes**: `ejercicios-practicos.md`, `tablas-comparativas.md`, `README.md`
+
+- **Clase 2**: ✅ DECK COMPLETADO — Taller Práctico: Herramientas SAT, XML, Validación y Cancelación
+  - **Duración**: 210 min efectivos
+  - **Temas** (6 bloques): herramientas del SAT (Mis Cuentas, Factura Fácil, Visores); casos prácticos de emisión; estructura del XML nodo por nodo; validación de CFDI; cancelación paso a paso por motivo; detección y corrección de errores
+  - **Archivo fuente**: `modulo-06-facturacion-electronica-cfdi/clase-02-cfdi-taller-practico/0602-contenido.md`
+  - **Entregado**: `slides-scripts.md` (34 slides, 6 bloques con iconos)
+  - **Pendientes**: `ejercicios-practicos.md`, `README.md`
 
 ---
 
@@ -119,9 +134,13 @@ modulo-04-isr-personas-fisicas/
     ├── ejercicios-practicos.md     # Pendiente
     └── README.md                   # Pendiente
 
-modulo-06-[nombre]/
-├── clase-01-[nombre]/
-└── ...
+modulo-06-facturacion-electronica-cfdi/
+├── clase-01-cfdi-fundamentos-complementos/
+│   ├── 0601-contenido.md           # Material fuente (investigación)
+│   └── slides-scripts.md           # ✅ Entregado (34 slides)
+└── clase-02-cfdi-taller-practico/
+    ├── 0602-contenido.md           # Material fuente (investigación)
+    └── slides-scripts.md           # ✅ Entregado (34 slides)
 ```
 
 ---
@@ -234,12 +253,13 @@ Ejemplos:
 
 - [x] Definir temas específicos de Módulo 4 (según PDF del diplomado)
 - [x] Crear estructura de carpetas del Módulo 4
-- [ ] Definir temas específicos del Módulo 6 (según PDF del diplomado)
-- [ ] Desarrollar `slides-scripts.md` de la Clase 1 del Módulo 4
-- [ ] Desarrollar `ejercicios-practicos.md` y `tablas-comparativas.md` de la Clase 1 del Módulo 4
-- [ ] Desarrollar `README.md` de la Clase 1 del Módulo 4
-- [ ] Desarrollar `slides-scripts.md` de la Clase 2 del Módulo 4
-- [ ] Desarrollar `ejercicios-practicos.md` y `README.md` de la Clase 2 del Módulo 4
+- [x] Definir temas específicos del Módulo 6 (Facturación Electrónica y CFDI 4.0)
+- [x] Crear estructura de carpetas del Módulo 6
+- [x] Desarrollar `slides-scripts.md` de la Clase 1 del Módulo 6
+- [x] Desarrollar `slides-scripts.md` de la Clase 2 del Módulo 6
+- [ ] Desarrollar `ejercicios-practicos.md`, `tablas-comparativas.md` y `README.md` de la Clase 1 del Módulo 6
+- [ ] Desarrollar `ejercicios-practicos.md` y `README.md` de la Clase 2 del Módulo 6
+- [ ] Desarrollar `README.md` restantes de las Clases 1 y 2 del Módulo 4
 - [ ] Establecer calendario de entregas
 - [ ] Preparar materiales de apoyo adicionales (jurisprudencia, plantillas)
 

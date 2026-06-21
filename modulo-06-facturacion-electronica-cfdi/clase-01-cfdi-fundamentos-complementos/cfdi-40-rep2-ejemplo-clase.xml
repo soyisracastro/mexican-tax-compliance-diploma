@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante
+    xmlns:cfdi="http://www.sat.gob.mx/cfd/4"
+    xmlns:pago20="http://www.sat.gob.mx/Pagos20"
+    xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd http://www.sat.gob.mx/Pagos20 http://www.sat.gob.mx/sitio_internet/cfd/Pagos/Pagos20.xsd"
+    Version="4.0"
+    Serie="P"
+    Folio="2026002"
+    Fecha="2026-04-28T12:05:00"
+    Sello="SELLO_DIGITAL_DEL_CONTRIBUYENTE__cadena_base64_larga__"
+    NoCertificado="30001000000500003456"
+    Certificado="CERTIFICADO_DEL_EMISOR__cadena_base64_larga__"
+    SubTotal="0"
+    Moneda="XXX"
+    Total="0"
+    TipoDeComprobante="P"
+    Exportacion="01"
+    LugarExpedicion="26015">
+
+  <!-- Mismo cascaron del tipo P: sin MetodoPago ni FormaPago arriba. -->
+
+  <cfdi:Emisor
+      Rfc="EKU9003173C9"
+      Nombre="ESCUELA KEMPER URGATE SA DE CV"
+      RegimenFiscal="601"/>
+
+  <cfdi:Receptor
+      Rfc="URE180429TM6"
+      Nombre="UNIVERSIDAD ROBOTICA ESPANOLA SC"
+      DomicilioFiscalReceptor="65000"
+      RegimenFiscalReceptor="601"
+      UsoCFDI="CP01"/>
+
+  <cfdi:Conceptos>
+    <cfdi:Concepto
+        ClaveProdServ="84111506"
+        Cantidad="1"
+        ClaveUnidad="ACT"
+        Descripcion="Pago"
+        ValorUnitario="0"
+        Importe="0"
+        ObjetoImp="01"/>
+  </cfdi:Conceptos>
+
+  <cfdi:Complemento>
+    <pago20:Pagos Version="2.0">
+
+      <pago20:Totales
+          TotalTrasladosBaseIVA16="24137.93"
+          TotalTrasladosImpuestoIVA16="3862.07"
+          MontoTotalPagos="28000.00"/>
+
+      <pago20:Pago
+          FechaPago="2026-04-28T12:00:00"
+          FormaDePagoP="03"
+          MonedaP="MXN"
+          Monto="28000.00">
+
+        <!-- Segunda y ultima parcialidad: liquida el saldo. -->
+        <pago20:DoctoRelacionado
+            IdDocumento="AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
+            Serie="F"
+            Folio="2026000"
+            MonedaDR="MXN"
+            EquivalenciaDR="1"
+            NumParcialidad="2"
+            ImpSaldoAnt="28000.00"
+            ImpPagado="28000.00"
+            ImpSaldoInsoluto="0.00"
+            ObjetoImpDR="02">
+          <pago20:ImpuestosDR>
+            <pago20:TrasladosDR>
+              <pago20:TrasladoDR
+                  BaseDR="24137.93"
+                  ImpuestoDR="002"
+                  TipoFactorDR="Tasa"
+                  TasaOCuotaDR="0.160000"
+                  ImporteDR="3862.07"/>
+            </pago20:TrasladosDR>
+          </pago20:ImpuestosDR>
+        </pago20:DoctoRelacionado>
+
+        <pago20:ImpuestosP>
+          <pago20:TrasladosP>
+            <pago20:TrasladoP
+                BaseP="24137.93"
+                ImpuestoP="002"
+                TipoFactorP="Tasa"
+                TasaOCuotaP="0.160000"
+                ImporteP="3862.07"/>
+          </pago20:TrasladosP>
+        </pago20:ImpuestosP>
+      </pago20:Pago>
+    </pago20:Pagos>
+
+    <tfd:TimbreFiscalDigital
+        xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd"
+        Version="1.1"
+        UUID="C3D4E5F6-A7B8-3C4D-5E6F-7A8B9C0D1E2F"
+        FechaTimbrado="2026-04-28T12:05:05"
+        RfcProvCertif="SPR190613I52"
+        SelloCFD="SELLO_DEL_CFDI__cadena_base64_larga__"
+        NoCertificadoSAT="30001000000400002495"
+        SelloSAT="SELLO_DEL_SAT__cadena_base64_larga__"/>
+  </cfdi:Complemento>
+
+</cfdi:Comprobante>

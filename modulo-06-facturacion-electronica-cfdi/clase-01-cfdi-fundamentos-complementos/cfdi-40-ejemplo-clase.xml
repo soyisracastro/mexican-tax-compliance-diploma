@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante
+    xmlns:cfdi="http://www.sat.gob.mx/cfd/4"
+    xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd"
+    Version="4.0"
+    Serie="F"
+    Folio="2026001"
+    Fecha="2026-01-15T12:30:45"
+    Sello="SELLO_DIGITAL_DEL_CONTRIBUYENTE__cadena_base64_larga__"
+    FormaPago="03"
+    NoCertificado="30001000000500003456"
+    Certificado="CERTIFICADO_DEL_EMISOR__cadena_base64_larga__"
+    SubTotal="10000.00"
+    Moneda="MXN"
+    Total="11600.00"
+    TipoDeComprobante="I"
+    Exportacion="01"
+    MetodoPago="PUE"
+    LugarExpedicion="26015">
+
+  <!-- NODO OPCIONAL: solo aparece en sustituciones, devoluciones, notas de credito, etc.
+       Aqui se muestra una sustitucion (TipoRelacion 04) para que se vea el nodo. -->
+  <cfdi:CfdiRelacionados TipoRelacion="04">
+    <cfdi:CfdiRelacionado UUID="11111111-2222-3333-4444-555555555555"/>
+  </cfdi:CfdiRelacionados>
+
+  <cfdi:Emisor
+      Rfc="EKU9003173C9"
+      Nombre="ESCUELA KEMPER URGATE SA DE CV"
+      RegimenFiscal="601"/>
+
+  <cfdi:Receptor
+      Rfc="URE180429TM6"
+      Nombre="UNIVERSIDAD ROBOTICA ESPANOLA SC"
+      DomicilioFiscalReceptor="65000"
+      RegimenFiscalReceptor="601"
+      UsoCFDI="G03"/>
+
+  <cfdi:Conceptos>
+    <cfdi:Concepto
+        ClaveProdServ="80101500"
+        NoIdentificacion="CONS-001"
+        Cantidad="1"
+        ClaveUnidad="E48"
+        Unidad="Unidad de servicio"
+        Descripcion="Servicios de consultoria administrativa"
+        ValorUnitario="10000.00"
+        Importe="10000.00"
+        ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado
+              Base="10000.00"
+              Impuesto="002"
+              TipoFactor="Tasa"
+              TasaOCuota="0.160000"
+              Importe="1600.00"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+
+  <cfdi:Impuestos TotalImpuestosTrasladados="1600.00">
+    <cfdi:Traslados>
+      <cfdi:Traslado
+          Base="10000.00"
+          Impuesto="002"
+          TipoFactor="Tasa"
+          TasaOCuota="0.160000"
+          Importe="1600.00"/>
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+
+  <cfdi:Complemento>
+    <!-- El Timbre Fiscal Digital NO lo pone el contribuyente: lo inserta el PAC al certificar. -->
+    <tfd:TimbreFiscalDigital
+        xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd"
+        Version="1.1"
+        UUID="A1B2C3D4-E5F6-1A2B-3C4D-5E6F7A8B9C0D"
+        FechaTimbrado="2026-01-15T12:30:50"
+        RfcProvCertif="SPR190613I52"
+        SelloCFD="SELLO_DEL_CFDI__cadena_base64_larga__"
+        NoCertificadoSAT="30001000000400002495"
+        SelloSAT="SELLO_DEL_SAT__cadena_base64_larga__"/>
+  </cfdi:Complemento>
+
+</cfdi:Comprobante>
